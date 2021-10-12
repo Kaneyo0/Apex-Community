@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActionSemaine index{% endblock %}
+
+{% block body %}
+    <h1>ActionSemaine index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Video</th>
+                <th>Joueur</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for action_semaine in action_semaines %}
+            <tr>
+                <td>{{ action_semaine.id }}</td>
+                <td>{{ action_semaine.Nom }}</td>
+                <td>{{ action_semaine.Video }}</td>
+                <td>{{ action_semaine.Joueur }}</td>
+                <td>{{ action_semaine.Date ? action_semaine.Date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('user_action_semaine_show', {'id': action_semaine.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if app.user and is_granted ('ROLE_ADMIN') %}
+        <a href="http://sf.m3104.duchesne.com/admin/action-de-la-semaine/">Voir vue administrateur</a>
+    {% endif %}
+{% endblock %}

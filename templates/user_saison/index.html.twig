@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Saison index{% endblock %}
+
+{% block body %}
+    <h1>Saison index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numero</th>
+                <th>Date</th>
+                <th>NewCaracter</th>
+                <th>NewMap</th>
+                <th>NewWeapon</th>
+                <th>NbFix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for saison in saisons %}
+            <tr>
+                <td>{{ saison.id }}</td>
+                <td>{{ saison.numero }}</td>
+                <td>{{ saison.date ? saison.date|date('Y-m-d') : '' }}</td>
+                <td>{{ saison.newCaracter }}</td>
+                <td>{{ saison.newMap }}</td>
+                <td>{{ saison.newWeapon }}</td>
+                <td>{{ saison.nbFix }}</td>
+                <td>
+                    <a href="{{ path('user_saison_show', {'id': saison.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if app.user and is_granted ('ROLE_ADMIN') %}
+        <a href="http://sf.m3104.duchesne.com/admin/saison/">Voir vue administrateur</a>
+    {% endif %}
+{% endblock %}

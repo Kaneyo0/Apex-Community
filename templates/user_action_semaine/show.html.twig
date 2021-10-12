@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActionSemaine{% endblock %}
+
+{% block body %}
+    <h1>ActionSemaine</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ action_semaine.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ action_semaine.Nom }}</td>
+            </tr>
+            <tr>
+                <th>Video</th>
+                <td><iframe width="424" height="238" src="https://www.youtube.com/embed/{{ ytUrl }}?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+            </tr>
+            <tr>
+                <th>Joueur</th>
+                <td>{{ action_semaine.Joueur }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ action_semaine.Date ? action_semaine.Date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_action_semaine_index') }}">back to list</a>
+{% endblock %}

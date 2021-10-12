@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ActionSemaine{% endblock %}
+
+{% block body %}
+    <h1>ActionSemaine</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ action_semaine.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ action_semaine.Nom }}</td>
+            </tr>
+            <tr>
+                <th>Video</th>
+                <td>{{ action_semaine.Video }}</td>
+            </tr>
+            <tr>
+                <th>Joueur</th>
+                <td>{{ action_semaine.Joueur }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ action_semaine.Date ? action_semaine.Date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('action_semaine_index') }}">back to list</a>
+
+    <a href="{{ path('action_semaine_edit', {'id': action_semaine.id}) }}">edit</a>
+
+    {{ include('action_semaine/_delete_form.html.twig') }}
+{% endblock %}

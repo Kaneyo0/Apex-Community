@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - {% endblock %}
+
+{% block body %}
+<h1>ACCUEIL</h1>
+
+{{ render(controller(
+    'App\\Controller\\SearchController::searchBar'
+)) }}
+
+<article>
+    <h1>Dernière vidéo</h1>
+    <table class="actu">
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ video.Titre }}</td>
+            </tr>
+            <tr>
+                <th>Lien</th>
+                <td><iframe width="424" height="238" src="https://www.youtube.com/embed/{{ ytUrl }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ video.Description }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ video.Date ? video.Date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Uploader</th>
+                <td>{{ video.Uploader }}</td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+<article>
+    <h1>Dernier article</h1>
+    <table class="actu">
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ article.Nom }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><iframe width="424" height="238" src="{{ article.Image }}" title="Article image"></iframe></td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ article.Contenu }}</td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+{% endblock %}
+
+
+
+
+
+
+

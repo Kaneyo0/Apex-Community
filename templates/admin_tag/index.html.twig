@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tags - {% endblock %}
+
+{% block body %}
+    <h1>Tags</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tag in tags %}
+            <tr>
+                <td>{{ tag.id }}</td>
+                <td>{{ tag.Nom }}</td>
+                <td>
+                    <a href="{{ path('admin_tag_show', {'id': tag.id}) }}">Afficher</a>
+                    <a href="{{ path('admin_tag_edit', {'id': tag.id}) }}">Editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune donnée trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_tag_new') }}">Créer nouveau tag</a>
+{% endblock %}

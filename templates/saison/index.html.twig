@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Saison index - {% endblock %}
+{% block title %}Saisons - {% endblock %}
 
 {% block body %}
-    <h1>Saison index</h1>
+    <h1>Saisons</h1>
 
     <table class="table">
         <thead>
@@ -11,11 +11,11 @@
                 <th>Id</th>
                 <th>Numero</th>
                 <th>Date</th>
-                <th>NewCaracter</th>
-                <th>NewMap</th>
-                <th>NewWeapon</th>
-                <th>NbFix</th>
-                <th>actions</th>
+                <th>Nouvelle Légende</th>
+                <th>Nouvelle(s) carte(s)</th>
+                <th>Nouvelle(s) arme(s)</th>
+                <th>Nombre de correctifs</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,18 +29,20 @@
                 <td>{{ saison.newWeapon }}</td>
                 <td>{{ saison.nbFix }}</td>
                 <td>
-                    <a href="{{ path('saison_show', {'id': saison.id}) }}">show</a>
-                    <a href="{{ path('saison_edit', {'id': saison.id}) }}">edit</a>
+                    <a href="{{ path('saison_show', {'id': saison.id}) }}">Afficher</a>
+                    {% if app.user and is_granted ('ROLE_ADMIN') %}
+                        <a href="{{ path('saison_edit', {'id': saison.id}) }}">Editer</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucune donnée trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('saison_new') }}">Create new</a><br>
-    <a href="http://sf.m3104.duchesne.com/saison/">Voir vue utilisateur</a>
+    {% if app.user and is_granted ('ROLE_ADMIN') %}
+        <a href="{{ path('saison_new') }}">Créer nouvelle saison</a><br>
+    {% endif %}
 {% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vidéos - {% endblock %}
+
+{% block body %}
+    <h1>Vidéos</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Lien</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Uploader</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for video in videos %}
+            <tr>
+                <td>{{ video.id }}</td>
+                <td>{{ video.Titre }}</td>
+                <td>{{ video.Lien }}</td>
+                <td>{{ video.Description }}</td>
+                <td>{{ video.Date ? video.Date|date('Y-m-d') : '' }}</td>
+                <td>{{ video.Uploader }}</td>
+                <td>
+                    <a href="{{ path('video_show', {'id': video.id}) }}">Afficher</a>
+                    {% if app.user and is_granted ('ROLE_ADMIN') or app.user and app.user.username == video.Uploader %}
+                        <a href="{{ path('video_edit', {'id': video.id}) }}">Editer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucune donnée trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('video_new') }}">Ajouter vidéo</a>
+{% endblock %}

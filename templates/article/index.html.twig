@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles - {% endblock %}
+
+{% block body %}
+    <h1>Articles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Image</th>
+                <th>Contenu</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.Nom }}</td>
+                <td>{{ article.Image }}</td>
+                <td>{{ article.Contenu }}</td>
+                <td>
+                    <a href="{{ path('article_show', {'id': article.id}) }}">Afficher</a>
+                    {% if app.user and is_granted ('ROLE_ADMIN') %}
+                        <a href="{{ path('article_edit', {'id': article.id}) }}">Editer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucune donnée trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if app.user and is_granted ('ROLE_ADMIN') %}
+        <a href="{{ path('article_new') }}">Créer nouvel article</a>
+    {% endif %}
+{% endblock %}

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}Apex Community</title>
-        <link rel="icon" type="image/png" href="http://sf.m3104.duchesne.com/media/apex_favicon2.png">
+        <link rel="icon" type="image/png" href="https://seeklogo.com/images/A/apex-logo-C3478A4601-seeklogo.com.png">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
@@ -17,27 +17,19 @@
     </head>
     <body>
         <header>
-        <img id="logo" src="{{ asset('media/Apex_Legends_Logo.png') }}" alt="logo apex legend">
-       
+        <img id="logo" src="https://upload.wikimedia.org/wikipedia/fr/0/03/Apex_Legends_Logo.png" alt="logo apex legend">
 		<ul id="menu">
 			<li><a href="{{ url('home') }}">accueil</a></li>
-			<li><a href="#">record du monde</a></li>
-            {% if app.user and is_granted ('ROLE_ADMIN') %}
-                <li><a href="{{ url('action_semaine_index') }}">action de la semaine</a></li>
-            {% else %}
-                <li><a href="{{ url('user_action_semaine_index') }}">action de la semaine</a></li>
-            {% endif %}
-            {% if app.user and is_granted ('ROLE_ADMIN') %}
-                <li><a href="{{ url('saison_index') }}">saison</a></li>
-            {% else %}
-			    <li><a href="{{ url('user_saison_index') }}">saison</a></li>
-            {% endif %}
+			<li><a href="{{ url('video_index')}}">vidéos</a></li>
+            <li><a href="{{ url('article_index') }}">articles</a></li>
+            <li><a href="{{ url('saison_index') }}">saison</a></li>
             {% if app.user %}
-                <li class="lastItem" id="user">{{ app.user.username }}
+                <li class="lastItem" id="utilisateur">{{ app.user.username }}
                     <div class="profile icon"></div>
                     <ul>
                         {% if app.user and is_granted ('ROLE_ADMIN') %}
-                            <li><a href="{{ url('admin_user_index') }}">panneau admin</a></li>
+                            <li><a href="{{ url('admin_user_index') }}">panneau utilisateurs</a></li>
+                            <li><a href="{{ url('admin_tag_index') }}">panneau tags</a></li>
                         {% endif %}
                         <li><a id="logout" href="{{ url('app_logout') }}">déconnexion</a></li>
                     </ul>
@@ -51,6 +43,7 @@
             {% block body %}{% endblock %}
         </main>
         <footer>
+            <div>Créé par Tom DUCHESNE</div>
         </footer> 
     </body>
 </html>

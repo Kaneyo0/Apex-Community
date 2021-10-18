@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ video.Titre }} - {% endblock %}
+
+{% block body %}
+    <h1>Vidéo</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Titre</th>
+                <td>{{ video.Titre }}</td>
+            </tr>
+            <tr>
+                <th>Lien</th>
+                <td><iframe width="424" height="238" src="https://www.youtube.com/embed/{{ ytUrl }}?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ video.Description }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ video.Date ? video.Date|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Uploader</th>
+                <td>{{ video.Uploader }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('video_index') }}">Retour à la liste</a>
+    {% if app.user and is_granted ('ROLE_ADMIN') or app.user and app.user.username == video.Uploader %}
+        <a href="{{ path('video_edit', {'id': video.id}) }}">Editer</a>
+        {{ include('video/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

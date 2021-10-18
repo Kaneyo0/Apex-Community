@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resultats - {% endblock %}
+
+{% block body %}
+{% if app.request.method == 'POST' %}
+    {{ render(controller(
+        'App\\Controller\\SearchController::searchBar'
+    )) }}
+    <br>
+    <h1 class="mt-3">Vos résulats de recherche :</h1>
+    <br>
+    <h1>VIDEOS</h1>
+    <div>
+        {% if video | length == 0 %}
+            <h1>Aucun résulat pour votre recherche.</h1>
+           {% else %}
+               {% for videos in video %}
+                   <div class="mt-3 p-3 bg-light border rounded">
+                       <a href="http://sf.m3104.duchesne.com/video/{{ videos.Id }}">
+                              <h1 class="text-dark"><i class="bi bi-arrow-down-right-square-fill text-primary"></i> {{ videos.Titre }}</h1>
+                       </a>
+                   </div>
+              {% endfor %}
+          {% endif %}
+     </div>
+     <h1>ARTICLES</h1>
+     <div>
+        {% if article | length == 0 %}
+            <h1>Aucun résulat pour votre recherche.</h1>
+           {% else %}
+               {% for articles in article %}
+                   <div class="mt-3 p-3 bg-light border rounded">
+                       <a href="http://sf.m3104.duchesne.com/video/{{ articles.Id }}">
+                              <h1 class="text-dark"><i class="bi bi-arrow-down-right-square-fill text-primary"></i> {{ articles.Nom }}</h1>
+                       </a>
+                   </div>
+              {% endfor %}
+          {% endif %}
+     </div>
+{% endif %}
+{% endblock %}

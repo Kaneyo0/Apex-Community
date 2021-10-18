@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/saison')]
+//#[Route('/saison')]
 class SaisonController extends AbstractController
 {
-    #[Route('/', name: 'saison_index', methods: ['GET'])]
+    #[Route('/saison', name: 'saison_index', methods: ['GET'])]
     public function index(SaisonRepository $saisonRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         return $this->render('saison/index.html.twig', [
@@ -22,7 +22,7 @@ class SaisonController extends AbstractController
         ]);   
     }
 
-    #[Route('/new', name: 'saison_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/saison/new', name: 'saison_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $saison = new Saison();
@@ -43,7 +43,7 @@ class SaisonController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'saison_show', methods: ['GET'])]
+    #[Route('/saison/{id}', name: 'saison_show', methods: ['GET'])]
     public function show(Saison $saison): Response
     {
         return $this->render('saison/show.html.twig', [
@@ -51,7 +51,7 @@ class SaisonController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'saison_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/saison/{id}/edit', name: 'saison_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Saison $saison): Response
     {
         $form = $this->createForm(SaisonType::class, $saison);
@@ -69,7 +69,7 @@ class SaisonController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'saison_delete', methods: ['POST'])]
+    #[Route('/admin/Saison/{id}', name: 'saison_delete', methods: ['POST'])]
     public function delete(Request $request, Saison $saison): Response
     {
         if ($this->isCsrfTokenValid('delete'.$saison->getId(), $request->request->get('_token'))) {
